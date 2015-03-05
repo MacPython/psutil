@@ -1,0 +1,6 @@
+[submodule "psutil"]
+	path = psutil
+	url = https://github.com/giampaolo/psutil
+[submodule "terryfy"]
+	path = terryfy
+	url = git://github.com/MacPython/terryfy.git

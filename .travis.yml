@@ -1,0 +1,41 @@
+language:
+- objective-c
+env:
+  global:
+  - BUILD_COMMIT='latest-tag'  # comment out to build version in submodule
+  matrix:
+  - VERSION=2.7.8
+  - VERSION=3.3.5
+  - VERSION=3.4.2
+install:
+  - source terryfy/travis_tools.sh
+  - get_python_environment macpython $VERSION venv
+  - pip install delocate
+  - if [ -n "$BUILD_COMMIT" ]; then
+        checkout_commit psutil $BUILD_COMMIT;
+    fi
+  - cd psutil
+  - python setup.py bdist_wheel
+  - delocate-listdeps dist/*.whl # lists library dependencies
+  - delocate-wheel dist/*.whl # copies library dependencies into wheel
+  - delocate-addplat --rm-orig -x 10_9 -x 10_10 dist/*.whl
+  - pip install dist/*.whl
+  - cd ..
+  - pip install ipaddress
+script:
+  # install dependencies for tests e.g - pip install nose
+  - mkdir tmp_for_test
+  - cd tmp_for_test
+  - python $TRAVIS_BUILD_DIR/test/test_psutil.py
+  - python $TRAVIS_BUILD_DIR/test/test_memory_leaks.py
+  # Run the tests
+  - cd ..
+before_deploy: cd psutil/dist
+deploy:
+  provider: cloudfiles
+  username: travis-worker
+  api_key:
+      secure: "aC5AG3+Lcmzqapj1CZ1SoaKn3f7+wSb0FZp8MikwMtA1jeGEx1u6Hs98B9LbVZR1fCQrLUZKZBlHFm20AyWAqxyn0cTSI7EkiZi9adwuvTkMuWheA4qf+wfiKeNfIIau7/M/1LCm7KYc2myzcVKVw7UVqehb4u3b/A++OE+1j4s="
+  region: ORD
+  container: wheels
+  skip_cleanup: true
