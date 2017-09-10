@@ -1,41 +1,128 @@
-language:
-- objective-c
+language: python
+python: 3.5
+sudo: required
+dist: trusty
+services: docker
+osx_image: xcode6.4
+
 env:
   global:
-  - BUILD_COMMIT='latest-tag'  # comment out to build version in submodule
-  matrix:
-  - VERSION=2.7.8
-  - VERSION=3.3.5
-  - VERSION=3.4.2
+      - REPO_DIR=psutil
+      # Remember to edit appveyor.yml too
+      # Also see DAILY_COMMIT below
+      - BUILD_COMMIT=release-5.3.1
+      - PLAT=x86_64
+      - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
+      - BUILD_DEPENDS=
+      - TEST_DEPENDS=
+      # Following generated with
+      # travis encrypt -r MacPython/cython-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
+      - secure:
+          "k+rFEWlbje6cBTf9dEvtdTqJ66wgVMTcpy6rSZdHa0A6d21pIyuuKscp/fr++rF9x0DOzXLuuB2g4Wy4HaehGIZYYFrMpW1t8JlQKa6HG8a42AUV2uWPxfVDKdv1tqaJj75Ey+rBy5/gsPIaIIQtpbmwUM/HqzHscxCvpDEE5MU="
+      # Commit when running from daily branch
+      - DAILY_COMMIT=master
+
+matrix:
+  exclude:
+    # Exclude the default Python 3.5 build
+    - python: 3.5
+  include:
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.6
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.6
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - UNICODE_WIDTH=16
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=2.7
+        - PLAT=i686
+        - UNICODE_WIDTH=16
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.3
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.3
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.4
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.4
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.5
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.5
+        - PLAT=i686
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
+    - os: linux
+      env:
+        - MB_PYTHON_VERSION=3.6
+        - PLAT=i686
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=2.7
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.3
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.4
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.5
+    - os: osx
+      language: generic
+      env:
+        - MB_PYTHON_VERSION=3.6
+
+before_install:
+    - if [ "$TRAVIS_BRANCH" == "daily" ]; then
+          CONTAINER="pre-release";
+          BUILD_COMMIT=${DAILY_COMMIT:-$BUILD_COMMIT};
+      else
+          CONTAINER=wheels;
+          UPLOAD_ARGS="--no-update-index";
+      fi
+    - source multibuild/common_utils.sh
+    - source multibuild/travis_steps.sh
+    - before_install
+
 install:
-  - source terryfy/travis_tools.sh
-  - get_python_environment macpython $VERSION venv
-  - pip install delocate
-  - if [ -n "$BUILD_COMMIT" ]; then
-        checkout_commit psutil $BUILD_COMMIT;
-    fi
-  - cd psutil
-  - python setup.py bdist_wheel
-  - delocate-listdeps dist/*.whl # lists library dependencies
-  - delocate-wheel dist/*.whl # copies library dependencies into wheel
-  - delocate-addplat --rm-orig -x 10_9 -x 10_10 dist/*.whl
-  - pip install dist/*.whl
-  - cd ..
-  - pip install ipaddress
+    # Maybe get and clean and patch source
+    - clean_code $REPO_DIR $BUILD_COMMIT
+    - build_wheel $REPO_DIR $PLAT
+
 script:
-  # install dependencies for tests e.g - pip install nose
-  - mkdir tmp_for_test
-  - cd tmp_for_test
-  - python $TRAVIS_BUILD_DIR/test/test_psutil.py
-  - python $TRAVIS_BUILD_DIR/test/test_memory_leaks.py
-  # Run the tests
-  - cd ..
-before_deploy: cd psutil/dist
-deploy:
-  provider: cloudfiles
-  username: travis-worker
-  api_key:
-      secure: "aC5AG3+Lcmzqapj1CZ1SoaKn3f7+wSb0FZp8MikwMtA1jeGEx1u6Hs98B9LbVZR1fCQrLUZKZBlHFm20AyWAqxyn0cTSI7EkiZi9adwuvTkMuWheA4qf+wfiKeNfIIau7/M/1LCm7KYc2myzcVKVw7UVqehb4u3b/A++OE+1j4s="
-  region: ORD
-  container: wheels
-  skip_cleanup: true
+    - install_run $PLAT
+
+after_success:
+    # Upload wheels to Rackspace container
+    - pip install wheelhouse-uploader
+    - python -m wheelhouse_uploader upload --local-folder
+          ${TRAVIS_BUILD_DIR}/wheelhouse/
+          $UPLOAD_ARGS
+          $CONTAINER
