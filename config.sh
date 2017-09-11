@@ -21,7 +21,9 @@ function run_tests {
     fi
     python --version
     pwd
+    cd ..
     ls -la
-    PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/__main__.py
+    ls -la ..
+    # PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/__main__.py
     # PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_memory_leaks.py
 }
