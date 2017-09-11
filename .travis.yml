@@ -29,13 +29,7 @@ matrix:
   include:
     - os: linux
       env:
-        - MB_PYTHON_VERSION=2.6
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.6
-        - PLAT=i686
-    - os: linux
-      env:
+        - JOB="XXX"
         - MB_PYTHON_VERSION=2.7
     - os: linux
       env:

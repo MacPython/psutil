@@ -1,8 +1,12 @@
+.. image:: https://img.shields.io/travis/MacPython/psutil/master.svg?maxAge=3600&label=Linux%20/%20OSX
+    :target: https://travis-ci.org/giampaolo/psutil
+    :alt: Linux / OSX (Travis)
+
 ##################
 psutil wheel builder
 ##################
 
-Repository to build psutil wheels.
+Repository to build `psutil <https://github.com/giampaolo/psutil>`__ wheels.
 
 By default the repo builds the latest tag (the tag on the branch most recently
 branched from master - see http://stackoverflow.com/a/24557377/1939576). If you
