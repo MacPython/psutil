@@ -1,5 +1,5 @@
 .. image:: https://img.shields.io/travis/MacPython/psutil/master.svg?maxAge=3600&label=Linux%20/%20OSX
-    :target: https://travis-ci.org/giampaolo/psutil
+    :target: https://travis-ci.org/MacPython/psutil
     :alt: Linux / OSX (Travis)
 
 ##################

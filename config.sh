@@ -20,6 +20,7 @@ function run_tests {
         pip install $DEPENDS
     fi
     python --version
-    PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/__main__.py
-    PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_memory_leaks.py
+    cd ..
+    PSUTIL_TESTING=1 PYTHONWARNINGS=all python psutil/tests/__main__.py
+    # PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_memory_leaks.py
 }
