@@ -10,7 +10,7 @@ env:
       - REPO_DIR=psutil
       # Remember to edit appveyor.yml too
       # Also see DAILY_COMMIT below
-      - BUILD_COMMIT=release-5.3.1
+      - BUILD_COMMIT=c4c6e22ca4dad687d2a8505f9e0207d8ecd64358
       - PLAT=x86_64
       - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
       - BUILD_DEPENDS=
