@@ -16,9 +16,8 @@ env:
       - BUILD_DEPENDS=
       - TEST_DEPENDS=
       # Following generated with
-      # travis encrypt -r MacPython/cython-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
-      - secure:
-          "GX4leBSTVKYRr7j1y+FRla1ry+QsB+H47k/OpMTN+bCGYA/NCMpjITyf57DHTjWEBiFJHOF6hx4qpt+OIOYZv4sZIm5Ts0iN0+yKOv9Uc/wOvKSumR4lUs6xdSz2YBg+XEd3mGvYK8nR43+CQguHMaXbYa/090SXOKr5Mt4NOs0="
+      # travis encrypt -r MacPython/psutil-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
+      - secure: "TShPxjfYrHIYrf8CcdCfxrUNNCNcajUIiwwN9vd0xa1pnriwBnEiOGsBibYXPHDTtPx936DUfJXpsHuDcWYu023HNv9N7djZpNO1fI++tTCKFQahwln+wnIa/EzEOPK3EqyjmBR5i4Q1EU0LsKP3mNDdfAg5trpY23GTGPYQQto="
       # Commit when running from daily branch
       - DAILY_COMMIT=master
 
