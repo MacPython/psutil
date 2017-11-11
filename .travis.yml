@@ -8,9 +8,10 @@ osx_image: xcode6.4
 env:
   global:
       - REPO_DIR=psutil
+      # This is the psutil GIT cset.
       # Remember to edit appveyor.yml too
       # Also see DAILY_COMMIT below
-      - BUILD_COMMIT=e73ddf4057ed9ea07747b633bf539f6553366049
+      - BUILD_COMMIT=master
       - PLAT=x86_64
       - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
       - BUILD_DEPENDS=
