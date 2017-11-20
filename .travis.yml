@@ -82,11 +82,11 @@ matrix:
     #   env:
     #     - SYS=OSX
     #     - MB_PYTHON_VERSION=3.5
-    # - os: osx
-    #   language: generic
-    #   env:
-    #     - SYS=OSX
-    #     - MB_PYTHON_VERSION=3.6
+    - os: osx
+      language: generic
+      env:
+        - SYS=OSX
+        - MB_PYTHON_VERSION=3.6
 
 before_install:
     - if [ "$TRAVIS_BRANCH" == "daily" ]; then
