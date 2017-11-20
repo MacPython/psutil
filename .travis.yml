@@ -17,8 +17,8 @@ env:
       - BUILD_DEPENDS=
       - TEST_DEPENDS=
       # Following generated with
-      # travis encrypt -r MacPython/psutil-wheels WHEELHOUSE_UPLOADER_SECRET=<the api key>
-      - secure: "CJoUuosDNWnMgdbF8V4N+7x0L1o77KspnUfkRS0bK8Sd2TtLaImrtf1UdOzGSoL/EknG/m8lRHE9znKGwPWKfMPbWVOtWhfYT4xrnoUQ2yKW02fx/m5OiozQoCGYiONws9Nv1nFvzJ6PnyLGdhR5SKv4rWWqEZPSGGEZ4KtU51s="
+      # travis encrypt -r MacPython/psutil WHEELHOUSE_UPLOADER_SECRET=<the api key>
+      - secure: "NOv97zrh+QRrGa+iFPtIcqaBBppbVfOIKJsbPKYzv1zcr45oipaSXHuSQdXVFHyi33iR6ygejXQuFOf61MWXsE0lJQd/k1892+Kz/ojEfrJuEknBNiw9N6mBKHXtV6vAaX5/d6ku9fS/IEDNR2XLetGnVL3GP9Kgpul0eYbBKgd4XU91tP/K2NKfrAXKpWIl3EsoHPdjIjVcrSLg+JXzUyCAke+YG4g9igAzSPmE6DgKkQG4nVX/kvYCc3Yf5MQsZdPVH16gvhw5qRgkeW2m8poujKbXNik3qa8oNAfGzYZ98khjvYwKrhJVtMZ254Lw6C564EYwECAD/4J91oXJta9T+huXdgEf1tHo5P12h9NSSMneRrL3dr8i0py3wRX5G1iyvF5eX7NX03jRgFi81WSwLNiPnzKQvRfLAfB9Jwmg70FBz7X8Nc5HTzHMOWgobLsBySyodaEuHFzNlnUz5GA7kRXdCxRJ+RdQSsukQl6UBT2GcdyA3EWd1tgZ605Dxyxp2PKhnlw3AWRSdt3wKBk8GrOeBNm3sQgZ0PwrvNFoCMWjT+NneNyyDkZsI3pEOJWk87BRsYvdxwD1ged2Z2AYEMKICfGFvSoLsH2xY5CWl336a26eLnlyUPInImuk5Zn0eZFHDOXVQGVXRe6RVCebRMzm9ecqdOeiy/FiNJI="
       # Commit when running from daily branch
       - DAILY_COMMIT=master
 
