@@ -13,7 +13,7 @@ env:
       # This is the psutil GIT cset.
       # Remember to edit appveyor.yml too
       # Also see DAILY_COMMIT below
-      - BUILD_COMMIT=release-5.4.0
+      - BUILD_COMMIT=release-5.4.2
       - PLAT=x86_64
       - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
       - BUILD_DEPENDS=
@@ -32,10 +32,10 @@ matrix:
     - os: linux
       env:
         - MB_PYTHON_VERSION=2.7
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
+    # - os: linux
+    #   env:
+    #     - MB_PYTHON_VERSION=2.7
+    #     - PLAT=i686
     # - os: linux
     #   env:
     #     - MB_PYTHON_VERSION=3.4
@@ -57,17 +57,17 @@ matrix:
     #   env:
     #     - MB_PYTHON_VERSION=3.6
     #     - PLAT=i686
-    - os: osx
-      language: generic
-      env:
-        - SYS=OSX
-        - MB_PYTHON_VERSION=2.7
-    - os: osx
-      language: generic
-      env:
-        - SYS=OSX
-        - PLAT=i686
-        - MB_PYTHON_VERSION=2.7
+    # - os: osx
+    #   language: generic
+    #   env:
+    #     - SYS=OSX
+    #     - MB_PYTHON_VERSION=2.7
+    # - os: osx
+    #   language: generic
+    #   env:
+    #     - SYS=OSX
+    #     - PLAT=i686
+    #     - MB_PYTHON_VERSION=2.7
     # - os: osx
     #   language: generic
     #   env:

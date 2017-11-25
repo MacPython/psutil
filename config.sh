@@ -20,6 +20,17 @@ function run_tests {
     python --version
     pwd
     ls -la
+    # if [ "$PYVER" == "2.7" ] || [ "$PYVER" == "3.6" ]; then
+    if [ "$PYVER" == "2.7" ]; then
+        PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_process.py
+        PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_system.py
+        PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_connections.py
+        PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_unicode.py
+        PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_contracts.py
+    else
+        python -c "import psutil"
+    fi
+
     # PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/__main__.py
     # PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_memory_leaks.py
 }
