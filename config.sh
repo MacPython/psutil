@@ -21,7 +21,7 @@ function run_tests {
     pwd
     ls -la
     # if [ "$PYVER" == "2.7" ] || [ "$PYVER" == "3.6" ]; then
-    if [ "$PYVER" == "2.7" ]; then
+    if [ "$MB_PYTHON_VERSION" == "2.7" ]; then
         PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_process.py
         PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_system.py
         PSUTIL_TESTING=1 python -Wa ../psutil/psutil/tests/test_connections.py
