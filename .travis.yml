@@ -13,7 +13,7 @@ env:
       # This is the psutil GIT cset.
       # Remember to edit appveyor.yml too
       # Also see DAILY_COMMIT below
-      - BUILD_COMMIT=b710bf29c36a748fc2f82160f1ae1fa60779c996
+      - BUILD_COMMIT=19fa78b4d65dc422351bfe5237e7b08c8b97666c
       - PLAT=x86_64
       - WHEELHOUSE_UPLOADER_USERNAME=travis-worker
       - BUILD_DEPENDS=
